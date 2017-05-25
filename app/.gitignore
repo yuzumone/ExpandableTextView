@@ -1,0 +1,4 @@
+*.apk
+*.iml
+/build
+/libs
