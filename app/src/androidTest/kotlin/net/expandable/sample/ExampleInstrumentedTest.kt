@@ -1,4 +1,4 @@
-package net.yuzumone.expandabletextview
+package net.expandable.sample
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
 
-        assertEquals("net.yuzumone.expandabletextview", appContext.packageName)
+        assertEquals("net.expandable.sample", appContext.packageName)
     }
 }

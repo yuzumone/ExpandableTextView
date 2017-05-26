@@ -1,7 +1,7 @@
-package net.yuzumone.expandabletextview
+package net.expandable.sample
 
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
