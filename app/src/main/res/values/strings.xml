@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ExpandableTextView</string>
+    <string name="long_text">LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongText</string>
 </resources>
