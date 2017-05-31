@@ -24,7 +24,7 @@ class ExpandableTextView : TextView {
     private fun init(context: Context, attrs: AttributeSet, defStyleAttr: Int) {
         isClickable = true
         val array = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, 0)
-        isExpand = array.getBoolean(R.styleable.ExpandableTextView_isExpand, false)
+        isExpand = array.getBoolean(R.styleable.ExpandableTextView_expand, false)
         setExpand(isExpand)
         if (ellipsize == null) {
             ellipsize = TextUtils.TruncateAt.END
