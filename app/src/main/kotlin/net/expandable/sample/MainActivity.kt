@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
                 showToast("Expand")
             }
 
-            override fun unexpand(view: ExpandableTextView) {
-                showToast("Unexpand")
+            override fun collapse(view: ExpandableTextView) {
+                showToast("Collapse")
             }
         })
     }

@@ -51,7 +51,7 @@ class ExpandableTextView : TextView {
             if (isExpand) {
                 listener!!.expand(this)
             } else {
-                listener!!.unexpand (this)
+                listener!!.collapse(this)
             }
         }
         return super.performClick()
