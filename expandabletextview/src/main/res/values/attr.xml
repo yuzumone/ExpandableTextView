@@ -2,5 +2,7 @@
 <resources>
     <declare-styleable name="ExpandableTextView">
         <attr name="expand" format="boolean"/>
+        <attr name="expand_enabled" format="boolean"/>
+        <attr name="collapse_lines" format="integer"/>
     </declare-styleable>
 </resources>
