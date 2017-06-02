@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val textView = findViewById(R.id.text) as ExpandableTextView
         textView.text = getString(R.string.long_text)
+        textView.setCollapseLines(2)
         textView.setOnExpandableClickListener(object : OnExpandableClickListener{
             override fun expand(view: ExpandableTextView) {
                 showToast("Expand")

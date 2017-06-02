@@ -1,8 +1,11 @@
 package net.expandable
 
 import android.content.Context
+import android.graphics.Canvas
 import android.text.TextUtils
+import android.text.TextUtils.TruncateAt
 import android.util.AttributeSet
+import android.view.ViewTreeObserver
 import android.widget.TextView
 
 class ExpandableTextView : TextView {
@@ -10,7 +13,11 @@ class ExpandableTextView : TextView {
     private var listener: OnExpandableClickListener? = null
     private var isExpand: Boolean = false
     private var isExpandEnabled: Boolean = true
+    private var isFinishDraw: Boolean = false
     private var collapseLines: Int = 1
+    private var ellipsize: TruncateAt? = null
+    private var ellipsizedText: CharSequence = ""
+    private lateinit var fullText: CharSequence
 
     constructor(context: Context?) :
             this(context, null)
@@ -29,19 +36,19 @@ class ExpandableTextView : TextView {
         isExpand = array.getBoolean(R.styleable.ExpandableTextView_expand, false)
         isExpandEnabled = array.getBoolean(R.styleable.ExpandableTextView_expand_enabled, true)
         collapseLines = array.getInt(R.styleable.ExpandableTextView_collapse_lines, 1)
-        setExpand(isExpand)
         if (ellipsize == null) {
-            ellipsize = TextUtils.TruncateAt.END
+            ellipsize = TruncateAt.END
         }
+        setExpand(isExpand)
         array.recycle()
     }
 
     fun setExpand(expand: Boolean) {
         isExpand = expand
         if (expand) {
-            setHorizontallyScrolling(false)
+            expandText()
         } else {
-            setHorizontallyScrolling(true)
+            collapseText()
         }
     }
 
@@ -66,14 +73,69 @@ class ExpandableTextView : TextView {
     }
 
     override fun performClick(): Boolean {
-        setExpand(!isExpand)
-        if (listener != null) {
-            if (isExpand) {
-                listener!!.expand(this)
-            } else {
-                listener!!.collapse(this)
+        if (isExpandEnabled) {
+            setExpand(!isExpand)
+            if (listener != null) {
+                if (isExpand) {
+                    listener!!.expand(this)
+                } else {
+                    listener!!.collapse(this)
+                }
             }
         }
         return super.performClick()
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        isFinishDraw = true
+    }
+
+    override fun setText(text: CharSequence, type: BufferType?) {
+        super.setText(text, type)
+        if (ellipsizedText != text) {
+            fullText = text
+        }
+    }
+
+    fun getFullText(): CharSequence {
+        return fullText
+    }
+
+    override fun setMaxLines(lines: Int) {
+        // do nothing
+    }
+
+    override fun setEllipsize(where: TruncateAt) {
+        ellipsize = where
+    }
+
+    override fun getEllipsize(): TruncateAt? {
+        return ellipsize
+    }
+
+    private fun expandText() {
+        text = fullText
+    }
+
+    private fun collapseText() {
+        if (isFinishDraw) {
+            performEllipsize()
+        } else {
+            viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    performEllipsize()
+                }
+            })
+        }
+    }
+
+    private fun performEllipsize() {
+        val avail = (0..collapseLines - 1)
+                .map { layout.getLineMax(it) }
+                .sum()
+        ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
+        text = ellipsizedText
     }
 }
