@@ -1,6 +1,7 @@
 # ExpandableTextView
 [![JitPack](https://img.shields.io/badge/jitpack-v0.2.0-brightgreen.svg)](https://jitpack.io/#yuzumone/ExpandableTextView/)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Build Status](https://travis-ci.org/yuzumone/ExpandableTextView.svg?branch=master)](https://travis-ci.org/yuzumone/ExpandableTextView)
 
 ExpandableTextView is an android TextView library that performs multiline ellipsize.
 
