@@ -132,10 +132,12 @@ class ExpandableTextView : TextView {
     }
 
     private fun performEllipsize() {
-        val avail = (0..collapseLines - 1)
-                .map { layout.getLineMax(it) }
-                .sum()
-        ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
-        text = ellipsizedText
+        if (visibility == VISIBLE) {
+            val avail = (0..collapseLines - 1)
+                    .map { layout.getLineMax(it) }
+                    .sum()
+            ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
+            text = ellipsizedText
+        }
     }
 }
