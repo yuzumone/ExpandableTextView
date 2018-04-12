@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import net.expandable.ExpandableTextView
-import net.expandable.OnExpandableClickListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,15 +13,10 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById(R.id.text) as ExpandableTextView
         textView.text = getString(R.string.long_text)
         textView.setCollapseLines(2)
-        textView.setOnExpandableClickListener(object : OnExpandableClickListener{
-            override fun expand(view: ExpandableTextView) {
-                showToast("Expand")
-            }
-
-            override fun collapse(view: ExpandableTextView) {
-                showToast("Collapse")
-            }
-        })
+        textView.setOnExpandableClickListener(
+                onExpand = { showToast("Expand") },
+                onCollapse = { showToast("Collapse") }
+        )
     }
 
     private fun showToast(text: String) {

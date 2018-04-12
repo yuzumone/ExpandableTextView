@@ -56,6 +56,14 @@ class ExpandableTextView : TextView {
         this.listener = listener
     }
 
+    fun setOnExpandableClickListener(
+            onExpand: (ExpandableTextView) -> Unit,
+            onCollapse: (ExpandableTextView) -> Unit
+    ) = setOnExpandableClickListener(object : OnExpandableClickListener {
+        override fun expand(view: ExpandableTextView): Unit = onExpand(view)
+        override fun collapse(view: ExpandableTextView): Unit = onCollapse(view)
+    })
+
     fun setCollapseLines(lines: Int) {
         collapseLines = lines
     }
