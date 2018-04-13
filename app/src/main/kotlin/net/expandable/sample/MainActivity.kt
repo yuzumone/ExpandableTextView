@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val textView = findViewById(R.id.text) as ExpandableTextView
+        val textView = findViewById<ExpandableTextView>(R.id.text)
         textView.text = getString(R.string.long_text)
         textView.setCollapseLines(2)
         textView.setOnExpandableClickListener(
