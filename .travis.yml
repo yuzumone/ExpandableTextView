@@ -7,7 +7,7 @@ before_script:
 - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
 before_install:
-- yes | sdkmanager "platforms;android-27"
+- yes | sdkmanager "platforms;android-29"
 
 language: android
 jdk: oraclejdk8
@@ -21,10 +21,10 @@ android:
     - extra-android-support
 
     # The BuildTools version used by your project
-    - build-tools-27.0.3
+    - build-tools-29.0.2
 
     # The SDK version used to compile your project
-    - android-27
+    - android-29
 
 script:
   - "/bin/bash ./gradlew install"
