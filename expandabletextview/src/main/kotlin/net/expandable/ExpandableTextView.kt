@@ -140,7 +140,7 @@ class ExpandableTextView : TextView {
     }
 
     private fun performEllipsize() {
-        if (visibility == VISIBLE) {
+        if (visibility == VISIBLE && !isExpand) {
             if (layout.lineCount <= collapseLines) return
             val avail = (0 until collapseLines)
                     .map { layout.getLineMax(it) }
