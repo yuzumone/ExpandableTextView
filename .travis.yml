@@ -27,3 +27,4 @@ android:
 
 script:
   - "/bin/bash ./gradlew install"
+  - "/bin/bash ./gradlew lint"
