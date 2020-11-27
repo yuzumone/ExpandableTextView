@@ -6,9 +6,9 @@ import android.text.TextUtils
 import android.text.TextUtils.TruncateAt
 import android.util.AttributeSet
 import android.view.ViewTreeObserver
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 
-class ExpandableTextView : TextView {
+class ExpandableTextView : AppCompatTextView {
 
     private var listener: OnExpandableClickListener? = null
     private var isExpand: Boolean = false
@@ -19,15 +19,15 @@ class ExpandableTextView : TextView {
     private var ellipsizedText: CharSequence = ""
     private lateinit var fullText: CharSequence
 
-    constructor(context: Context?) :
+    constructor(context: Context) :
             this(context, null)
 
-    constructor(context: Context?, attrs: AttributeSet?) :
+    constructor(context: Context, attrs: AttributeSet?) :
             this(context, attrs, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr) {
-        init(context!!, attrs, defStyleAttr)
+        init(context, attrs, defStyleAttr)
     }
 
     private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
