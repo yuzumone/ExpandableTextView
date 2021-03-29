@@ -62,11 +62,6 @@ class ExpandableTextView @JvmOverloads constructor(
     override fun performClick(): Boolean {
         if (isExpandEnabled) {
             isExpanded = !isExpanded
-            if (isExpanded) {
-                listener?.expand(this)
-            } else {
-                listener?.collapse(this)
-            }
         }
         return super.performClick()
     }
@@ -97,6 +92,7 @@ class ExpandableTextView @JvmOverloads constructor(
 
     private fun expandText() {
         text = fullText
+        listener?.expand(this)
     }
 
     private fun collapseText() {
@@ -122,6 +118,7 @@ class ExpandableTextView @JvmOverloads constructor(
                 ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
                 text = ellipsizedText
             }
+            listener?.collapse(this)
         }
     }
 }
