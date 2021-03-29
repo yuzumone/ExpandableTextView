@@ -8,48 +8,43 @@ import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import androidx.appcompat.widget.AppCompatTextView
 
-class ExpandableTextView : AppCompatTextView {
-
+class ExpandableTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatTextView(context, attrs, defStyleAttr) {
+    
     private var listener: OnExpandableClickListener? = null
-    private var isExpand: Boolean = false
-    private var isExpandEnabled: Boolean = true
     private var isFinishDraw: Boolean = false
-    private var collapseLines: Int = 1
     private var ellipsize: TruncateAt? = null
     private var ellipsizedText: CharSequence = ""
-    private lateinit var fullText: CharSequence
+    
+    lateinit var fullText: CharSequence
+        private set
+    
+    var isExpanded: Boolean = false
+        set(value) {
+            field = value
+            if (value) {
+                expandText()
+            } else {
+                collapseText()
+            }
+        }
+    
+    var isExpandEnabled: Boolean = true
+    var collapseLines: Int = 1
 
-    constructor(context: Context) :
-            this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) :
-            this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
-            super(context, attrs, defStyleAttr) {
-        init(context, attrs, defStyleAttr)
-    }
-
-    private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+    init {
         isClickable = true
         val array = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, 0)
-        isExpand = array.getBoolean(R.styleable.ExpandableTextView_expand, false)
+        isExpanded = array.getBoolean(R.styleable.ExpandableTextView_expand, false)
         isExpandEnabled = array.getBoolean(R.styleable.ExpandableTextView_expand_enabled, true)
         collapseLines = array.getInt(R.styleable.ExpandableTextView_collapse_lines, 1)
         if (ellipsize == null) {
             ellipsize = TruncateAt.END
         }
-        setExpand(isExpand)
         array.recycle()
-    }
-
-    fun setExpand(expand: Boolean) {
-        isExpand = expand
-        if (expand) {
-            expandText()
-        } else {
-            collapseText()
-        }
     }
 
     fun setOnExpandableClickListener(listener: OnExpandableClickListener) {
@@ -57,39 +52,16 @@ class ExpandableTextView : AppCompatTextView {
     }
 
     fun setOnExpandableClickListener(
-            onExpand: (ExpandableTextView) -> Unit,
-            onCollapse: (ExpandableTextView) -> Unit
+            onExpand: (ExpandableTextView) -> Unit = { },
+            onCollapse: (ExpandableTextView) -> Unit = { }
     ) = setOnExpandableClickListener(object : OnExpandableClickListener {
         override fun expand(view: ExpandableTextView): Unit = onExpand(view)
         override fun collapse(view: ExpandableTextView): Unit = onCollapse(view)
     })
 
-    fun setCollapseLines(lines: Int) {
-        collapseLines = lines
-    }
-
-    fun getCollapseLines(): Int {
-        return collapseLines
-    }
-
-    fun setExpandEnabled(expandEnabled: Boolean) {
-        isExpandEnabled = expandEnabled
-    }
-
-    fun getExpandEnabled(): Boolean {
-        return isExpandEnabled
-    }
-
     override fun performClick(): Boolean {
         if (isExpandEnabled) {
-            setExpand(!isExpand)
-            if (listener != null) {
-                if (isExpand) {
-                    listener!!.expand(this)
-                } else {
-                    listener!!.collapse(this)
-                }
-            }
+            isExpanded = !isExpanded
         }
         return super.performClick()
     }
@@ -106,10 +78,6 @@ class ExpandableTextView : AppCompatTextView {
         }
     }
 
-    fun getFullText(): CharSequence {
-        return fullText
-    }
-
     override fun setMaxLines(lines: Int) {
         // do nothing
     }
@@ -124,15 +92,16 @@ class ExpandableTextView : AppCompatTextView {
 
     private fun expandText() {
         text = fullText
+        listener?.expand(this)
     }
 
     private fun collapseText() {
         if (isFinishDraw) {
             performEllipsize()
         } else {
-            viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    viewTreeObserver?.removeOnGlobalLayoutListener(this)
                     performEllipsize()
                 }
             })
@@ -140,13 +109,16 @@ class ExpandableTextView : AppCompatTextView {
     }
 
     private fun performEllipsize() {
-        if (visibility == VISIBLE && !isExpand) {
-            if (layout.lineCount <= collapseLines) return
-            val avail = (0 until collapseLines)
-                    .map { layout.getLineMax(it) }
+        if (visibility == VISIBLE && !isExpanded) {
+            layout?.let {
+                if (it.lineCount <= collapseLines) return
+                val avail = (0 until collapseLines)
+                    .map { lines -> it.getLineMax(lines) }
                     .sum()
-            ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
-            text = ellipsizedText
+                ellipsizedText = TextUtils.ellipsize(text, paint, avail, ellipsize)
+                text = ellipsizedText
+            }
+            listener?.collapse(this)
         }
     }
 }

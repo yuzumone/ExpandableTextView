@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val textView = findViewById<ExpandableTextView>(R.id.text)
         textView.text = getString(R.string.long_text)
-        textView.setCollapseLines(2)
+        textView.collapseLines = 2
         textView.setOnExpandableClickListener(
                 onExpand = { showToast("Expand") },
                 onCollapse = { showToast("Collapse") }
