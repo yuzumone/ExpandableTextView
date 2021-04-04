@@ -13,15 +13,15 @@ class ExpandableTextView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
-    
+
     private var listener: OnExpandableClickListener? = null
     private var isFinishDraw: Boolean = false
     private var ellipsize: TruncateAt? = null
     private var ellipsizedText: CharSequence = ""
-    
+
     lateinit var fullText: CharSequence
         private set
-    
+
     var isExpanded: Boolean = false
         set(value) {
             field = value
@@ -38,7 +38,7 @@ class ExpandableTextView @JvmOverloads constructor(
     init {
         isClickable = true
         val array = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, 0)
-        isExpanded = array.getBoolean(R.styleable.ExpandableTextView_expand, false)
+        isExpanded = array.getBoolean(R.styleable.ExpandableTextView_expanded, false)
         isExpandEnabled = array.getBoolean(R.styleable.ExpandableTextView_expand_enabled, true)
         collapseLines = array.getInt(R.styleable.ExpandableTextView_collapse_lines, 1)
         if (ellipsize == null) {
