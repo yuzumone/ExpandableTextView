@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ExpandableTextView">
-        <attr name="expand" format="boolean"/>
+        <attr name="expanded" format="boolean"/>
         <attr name="expand_enabled" format="boolean"/>
         <attr name="collapse_lines" format="integer"/>
     </declare-styleable>
