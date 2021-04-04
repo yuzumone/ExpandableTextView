@@ -1,5 +1,5 @@
 # ExpandableTextView
-[![JitPack](https://img.shields.io/badge/jitpack-0.2.4-brightgreen.svg)](https://jitpack.io/#yuzumone/ExpandableTextView/)
+[![JitPack](https://img.shields.io/badge/jitpack-0.3.0-brightgreen.svg)](https://jitpack.io/#yuzumone/ExpandableTextView/)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/yuzumone/ExpandableTextView.svg?branch=master)](https://travis-ci.org/yuzumone/ExpandableTextView)
 
@@ -25,7 +25,7 @@ Add this to your app `build.gradle` file.
 ```gradle
 dependencies {
     ...
-    implementation 'com.github.yuzumone:ExpandableTextView:0.2.4'
+    implementation 'com.github.yuzumone:ExpandableTextView:0.3.0'
 }
 ```
 
@@ -42,7 +42,7 @@ dependencies {
 ### Attributes
 ```xml
 <net.expandable.ExpandableTextView
-    app:expand="false"
+    app:expanded="false"
     app:expand_enabled="true"
     app:collapse_lines="1"
     />
@@ -53,16 +53,16 @@ To set a state the TextView of ellipsize you use the setExpand functionality via
 
 ### XML
 ```xml
-app:expand="true"
+app:expanded="true"
 or
-app:expand="false"
+app:expanded="false"
 ```
 
 ### Kotlin
 ```kotlin
-textView.setExpand(true)
+textView.isExpanded = true
 or
-textView.setExpand(false)
+textView.isExpanded = false
 ```
 
 ## Expand_enabled
@@ -77,9 +77,9 @@ app:expand_enabled="false"
 
 ### Kotlin
 ```kotlin
-textView.setExpandEnabled(true)
+textView.isExpandEnabled = true
 or
-textView.setExpandEnabled(false)
+textView.isExpandEnabled = false
 ```
 
 ## Collapse_lines
@@ -92,7 +92,7 @@ app:collapse_lines="1"
 
 ### Kotlin
 ```kotlin
-textView.setCollapseLines(1)
+textView.collapseLines = 1
 ```
 
 ## OnExpandableClickListener
