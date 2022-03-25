@@ -33,6 +33,7 @@ class ExpandableTextView @JvmOverloads constructor(
         }
     
     var isExpandEnabled: Boolean = true
+    var isOnlyFirstExpand: Boolean = false
     var collapseLines: Int = 1
 
     init {
@@ -40,6 +41,7 @@ class ExpandableTextView @JvmOverloads constructor(
         val array = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, 0)
         isExpanded = array.getBoolean(R.styleable.ExpandableTextView_expanded, false)
         isExpandEnabled = array.getBoolean(R.styleable.ExpandableTextView_expand_enabled, true)
+        isOnlyFirstExpand = array.getBoolean(R.styleable.ExpandableTextView_expand_first_time, false)
         collapseLines = array.getInt(R.styleable.ExpandableTextView_collapse_lines, 1)
         if (ellipsize == null) {
             ellipsize = TruncateAt.END
@@ -60,8 +62,10 @@ class ExpandableTextView @JvmOverloads constructor(
     })
 
     override fun performClick(): Boolean {
-        if (isExpandEnabled) {
-            isExpanded = !isExpanded
+        if ((isExpandEnabled && !isOnlyFirstExpand)
+            || (isOnlyFirstExpand && !isExpanded)
+        ) {
+            isExpanded = isExpanded.not()
         }
         return super.performClick()
     }
