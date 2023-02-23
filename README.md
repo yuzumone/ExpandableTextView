@@ -1,5 +1,5 @@
 # ExpandableTextView
-[![JitPack](https://img.shields.io/badge/jitpack-0.3.1-brightgreen.svg)](https://jitpack.io/#yuzumone/ExpandableTextView/)
+[![JitPack](https://img.shields.io/badge/jitpack-0.3.2-brightgreen.svg)](https://jitpack.io/#yuzumone/ExpandableTextView/)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Android build test](https://github.com/yuzumone/ExpandableTextView/actions/workflows/build.yml/badge.svg)](https://github.com/yuzumone/ExpandableTextView/actions/workflows/build.yml)
 
@@ -25,7 +25,7 @@ Add this to your app `build.gradle` file.
 ```gradle
 dependencies {
     ...
-    implementation 'com.github.yuzumone:ExpandableTextView:0.3.1'
+    implementation 'com.github.yuzumone:ExpandableTextView:0.3.2'
 }
 ```
 
