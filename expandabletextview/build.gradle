@@ -1,35 +1,29 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
 
 group='com.github.yuzumone'
 
 android {
-    namespace 'net.expandable'
-    compileSdkVersion 33
+    namespace = 'net.expandable'
+    compileSdk = 33
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
-        versionCode 9
-        versionName "0.3.3"
+        minSdk = 16
+        targetSdk = 33
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+    publishing {
+        singleVariant('release')
     }
 }
 
@@ -45,7 +39,7 @@ afterEvaluate {
 
                 groupId = 'com.github.yuzumone'
                 artifactId = 'expandabletextview'
-                version = '0.3.2'
+                version = '0.3.3'
             }
         }
     }
