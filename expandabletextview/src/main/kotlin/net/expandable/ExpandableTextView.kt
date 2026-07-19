@@ -19,7 +19,7 @@ class ExpandableTextView @JvmOverloads constructor(
     private var ellipsize: TruncateAt? = null
     private var ellipsizedText: CharSequence = ""
 
-    lateinit var fullText: CharSequence
+    var fullText: CharSequence = text ?: ""
         private set
 
     var isExpanded: Boolean = false
@@ -31,7 +31,7 @@ class ExpandableTextView @JvmOverloads constructor(
                 collapseText()
             }
         }
-    
+
     var isExpandEnabled: Boolean = true
     var collapseLines: Int = 1
 

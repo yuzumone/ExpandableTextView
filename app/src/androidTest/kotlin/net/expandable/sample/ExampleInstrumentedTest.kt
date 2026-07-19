@@ -17,7 +17,7 @@ class ExampleInstrumentedTest {
     @Throws(Exception::class)
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
 
         assertEquals("net.expandable.sample", appContext.packageName)
     }
