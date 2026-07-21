@@ -7,10 +7,9 @@ group='com.github.yuzumone'
 
 android {
     namespace = 'net.expandable'
-    compileSdk = 33
+    compileSdk = 37
     defaultConfig {
         minSdk = 16
-        targetSdk = 33
     }
     buildTypes {
         release {
@@ -28,6 +27,7 @@ android {
 }
 
 dependencies {
+    //noinspection GradleDependency
     api 'androidx.appcompat:appcompat:1.6.1'
 }
 

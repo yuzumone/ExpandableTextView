@@ -71,7 +71,7 @@ class ExpandableTextView @JvmOverloads constructor(
         return super.performClick()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         isFinishDraw = true
     }
