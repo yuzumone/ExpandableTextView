@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace = 'net.expandable.sample'
-    compileSdk = 33
+    compileSdk = 37
     defaultConfig {
         applicationId = "net.expandable.sample"
         minSdk = 16
-        targetSdk = 33
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
