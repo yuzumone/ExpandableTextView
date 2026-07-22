@@ -19,5 +19,6 @@ jobs:
           java-version: '17'
       - name: Build with Gradle
         run: |
+          ./gradlew test
           ./gradlew publishToMavenLocal
           ./gradlew lint
